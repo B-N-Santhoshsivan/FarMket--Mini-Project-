@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login | FarMket</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #edf4e9;
+            color: #183b2b;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-card {
+            width: 500px;
+            padding: 30px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 12px 35px rgba(25, 65, 35, 0.1);
+        }
+
+        .logo {
+            text-align: center;
+            color: #17663b;
+            font-size: 29px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 26px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #6a796d;
+            margin-bottom: 28px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 19px;
+            border: 1px solid #d5dfd3;
+            border-radius: 7px;
+            font-size: 15px;
+            background: white;
+        }
+
+        input:focus, select:focus {
+            outline: 2px solid #8fc59d;
+            border-color: #17663b;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 7px;
+            background: #17663b;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #104d2c;
+        }
+
+        .bottom-text {
+            text-align: center;
+            margin-top: 22px;
+            font-size: 14px;
+        }
+
+        a {
+            color: #17663b;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .home-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="login-card">
+        <div class="logo">🌿 FarMket</div>
+
+        <h1>Welcome Back</h1>
+        <p class="subtitle">Sign in to your marketplace account.</p>
+        <p th:if="${error}" th:text="${error}" style="color: red;"></p>
+        <form action="/login" method="post">
+            <label for="role">Account type</label>
+            <select id="role" name="role" required>
+                <option value="">Choose your role</option>
+                <option value="FARMER">Farmer</option>
+                <option value="BUYER">Buyer</option>
+               
+            </select>
+
+            <label for="email">Email address</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="you@example.com"
+                required
+            >
+
+            <label for="password">Password</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+                required
+            >
+
+            <button type="submit">Login</button>
+        </form>
+
+        <p class="bottom-text">
+            Don't have an account?
+            <a href="/register">Register here</a>
+        </p>
+
+        <a class="home-link" href="/">← Back to Home</a>
+    </main>
+</body>
+</html>

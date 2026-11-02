@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Buyer Marketplace | FarMket</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+    <h1>FarMket Buyer Marketplace</h1>
+    <p>Browse agricultural products offered by farmers.</p>
+    <div class="account-info">
+    <p>
+        Logged in as:
+        <strong th:text="${loggedInEmail}"></strong>
+    </p>
+    <p>
+        Account type:
+        <strong>Buyer</strong>
+    </p>
+    <a th:href="@{/buyer-enquiries}">My Enquiries</a>
+</div>
+    <p th:if="${enquirySuccess}"
+       th:text="${enquirySuccess}"
+       style="color: green;"></p>
+
+    <p th:if="${enquiryError}"
+       th:text="${enquiryError}"
+       style="color: red;"></p>
+
+    <!-- Search and district filter -->
+    <form action="/buyer-dashboard" method="get" class="search-form">
+
+        <label for="search">Search product name</label>
+        <input type="text"
+               id="search"
+               name="search"
+               placeholder="Example: Tomato"
+               th:value="${search}">
+
+        <label for="district">Filter by district</label>
+        <input type="text"
+               id="district"
+               name="district"
+               placeholder="Example: Salem"
+               th:value="${district}">
+
+        <button type="submit">Search Products</button>
+        <a href="/buyer-dashboard">Show All Products</a>
+
+    </form>
+
+    <h2>Available products</h2>
+
+    <p th:if="${#lists.isEmpty(products)}">
+        No products match your search.
+    </p>
+
+    <!-- Separate card for each product -->
+    <div class="product-list">
+
+        <div class="product-card"
+             th:each="product : ${products}">
+
+            <h3 th:text="${product.productName}">Product Name</h3>
+            <p>
+    <strong>Farmer name:</strong>
+    <span th:text="${farmerNames[product.farmerEmail != null ? #strings.toLowerCase(product.farmerEmail) : ''] ?: 'Name unavailable'}">
+        Farmer Name
+    </span>
+</p>
+            <p>
+                <strong>Available quantity:</strong>
+                <span th:text="${product.quantity}"></span> kg
+            </p>
+
+            <p>
+                <strong>Price per kg:</strong>
+                ₹<span th:text="${product.pricePerKg}"></span>
+            </p>
+
+            <p>
+                <strong>District:</strong>
+                <span th:text="${product.district}"></span>
+            </p>
+
+            <div class="enquiry-section">
+                <h3>Interested in this product?</h3>
+
+                <form action="/enquiries/send" method="post">
+
+                    <input type="hidden"
+                           name="productId"
+                           th:value="${product.id}">
+
+                    <label>Quantity needed (kg)</label>
+                    <input type="number"
+                           name="requestedQuantity"
+                           min="0.01"
+                           th:max="${product.quantity}"
+                           step="0.01"
+                           required>
+                    <label>Offer price per kg (₹)</label>
+                    <input type="number"
+                        name="offeredPricePerKg"
+                                min="0.01"
+                                step="0.01"
+                                placeholder="Enter your offer per kg"
+                                required>
+                    <label>Message</label>
+                    <input type="text"
+                           name="message"
+                           placeholder="I am interested in this product"
+                           maxlength="500"
+                           required>
+
+                    <button type="submit">Send Enquiry</button>
+
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+    <p><a href="/">Go to Home</a></p>
+
+</body>
+</html>

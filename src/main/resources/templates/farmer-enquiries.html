@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Farmer Enquiries | FarMket</title>
+
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+    <h1>FarMket - Buyer Enquiries</h1>
+
+    <p>View enquiries received for your agricultural products.</p>
+
+    <!-- Success message -->
+    <p th:if="${success}"
+       th:text="${success}"
+       class="success-message">
+    </p>
+
+    <!-- Error message -->
+    <p th:if="${error}"
+       th:text="${error}"
+       class="error-message">
+    </p>
+
+    <!-- Message when no enquiries are available -->
+    <p th:if="${#lists.isEmpty(enquiries)}"
+       class="empty-message">
+        You have not received any enquiries yet.
+    </p>
+
+    <div class="enquiry-list">
+
+        <!-- Display each enquiry -->
+        <div class="enquiry-card"
+             th:each="enquiry : ${enquiries}">
+
+            <h2 th:text="${enquiry.productName}">
+                Product Name
+            </h2>
+
+            <p>
+                <strong>Requested quantity:</strong>
+                <span th:text="${enquiry.requestedQuantity}"></span> kg
+            </p>
+            <p>
+    <strong>Buyer's offered price:</strong>
+    ₹<span th:text="${#numbers.formatDecimal(enquiry.offeredPricePerKg, 1, 2)}"></span> per kg
+</p>
+
+<p>
+    <strong>Total offer amount:</strong>
+    ₹<span th:text="${#numbers.formatDecimal(enquiry.requestedQuantity * enquiry.offeredPricePerKg, 1, 2)}"></span>
+</p>
+            <p>
+                <strong>Buyer's message:</strong>
+                <span th:text="${enquiry.message}"></span>
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+
+                <span class="status"
+                      th:text="${enquiry.status}"
+                      th:classappend="${enquiry.status == 'PENDING'} ? ' pending' : ''">
+                    PENDING
+                </span>
+            </p>
+
+            <!-- Accept and Reject buttons for pending enquiries -->
+            <div th:if="${enquiry.status == 'PENDING'}"
+                 class="enquiry-actions">
+
+                <!-- Accept enquiry -->
+                <form th:action="@{/farmer-enquiries/{id}/respond(id=${enquiry.id})}"
+                      method="post">
+
+                    <input type="hidden"
+                           name="status"
+                           value="ACCEPTED">
+
+                    <button type="submit" class="accept-button">
+                        Accept Enquiry
+                    </button>
+                </form>
+
+                <!-- Reject enquiry -->
+                <form th:action="@{/farmer-enquiries/{id}/respond(id=${enquiry.id})}"
+                      method="post">
+
+                    <input type="hidden"
+                           name="status"
+                           value="REJECTED">
+
+                    <button type="submit" class="reject-button">
+                        Reject Enquiry
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <a class="back-link" href="/farmer-dashboard">
+        Back to Farmer Dashboard
+    </a>
+
+</body>
+</html>

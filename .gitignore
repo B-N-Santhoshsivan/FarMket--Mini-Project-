@@ -1,0 +1,9 @@
+.env
+.DS_Store
+target/
+apache-maven-3.10.0/
+farmket-error.log
+startup-error.log
+Readme.
+main.java
+*.log

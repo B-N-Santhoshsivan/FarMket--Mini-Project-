@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <title>Farmer Dashboard | FarMket</title>
+</head>
+<body>
+
+    <h1>FarMket Farmer Dashboard</h1>
+    <p>Add your agricultural products below.</p>
+    <div class="account-info">
+    <p>Logged in as: <strong th:text="${loggedInEmail}"></strong></p>
+    <p>Account type: <strong>Farmer</strong></p>
+</div>
+    <p th:if="${param.success}"
+   style="color: green;">
+    Product added successfully!
+</p>
+
+    <p th:if="${error}" th:text="${error}"
+       style="color: red;"></p>
+
+    <form action="/products/add" method="post">
+
+        <label for="productName">Product name</label>
+        <input type="text" id="productName"
+               name="productName" required>
+
+
+
+        <label for="quantity">Available quantity (kg)</label>
+        <input type="number" id="quantity" name="quantity"
+               min="0.01" step="0.01" required>
+
+
+
+        <label for="pricePerKg">Price per kg (₹)</label>
+        <input type="number" id="pricePerKg" name="pricePerKg"
+               min="0.01" step="0.01" required>
+
+
+
+        <label for="district">District</label>
+        <input type="text" id="district"
+               name="district" required>
+
+
+
+        <button type="submit">Add Product</button>
+
+    </form>
+
+    <h2>My Products</h2>
+
+    <ul>
+        <li th:each="product : ${products}">
+            <span th:text="${product.productName}"></span>
+            —
+            <span th:text="${product.quantity}"></span> kg
+            at ₹<span th:text="${product.pricePerKg}"></span>/kg
+            (<span th:text="${product.district}"></span>)
+        </li>
+    </ul>
+
+<a href="/farmer-enquiries" class="back-link">
+    View Buyer Enquiries
+</a>
+
+    <a href="/">Go to Home</a>
+
+</body>
+</html>

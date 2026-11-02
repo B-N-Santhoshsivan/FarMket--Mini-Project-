@@ -1,0 +1,321 @@
+
+/* Basic FarMket styling */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f8f1;
+    color: #333333;
+    margin: 0;
+    padding: 25px;
+}
+
+h1 {
+    color: #287a3d;
+    margin-bottom: 8px;
+}
+
+h2 {
+    color: #287a3d;
+    margin-top: 35px;
+}
+
+p {
+    font-size: 16px;
+}
+
+form {
+    background-color: white;
+    padding: 22px;
+    border: 1px solid #d6e5d3;
+    border-radius: 8px;
+    max-width: 450px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 9px;
+    margin-bottom: 18px;
+    border: 1px solid #bbbbbb;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+button {
+    background-color: #287a3d;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #1d5e2e;
+}
+
+ul {
+    background-color: white;
+    padding: 20px 20px 20px 40px;
+    border: 1px solid #d6e5d3;
+    border-radius: 8px;
+    max-width: 600px;
+}
+
+li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+a {
+    color: #287a3d;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Buyer marketplace table layout */
+table {
+    width: 100%;
+    max-width: 1200px;
+    border-collapse: collapse;
+    background-color: white;
+    margin-top: 20px;
+    table-layout: auto;
+}
+
+th {
+    background-color: #287a3d;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #d6e5d3;
+    vertical-align: middle;
+}
+
+td form {
+    width: 260px;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+td input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+td button {
+    white-space: nowrap;
+}
+
+tbody tr:hover {
+    background-color: #f0f7ed;
+}
+
+/* Buyer marketplace layout */
+
+.search-form {
+    width: 100%;
+    max-width: 530px;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+}
+
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 22px;
+    max-width: 1200px;
+}
+
+.product-card {
+    background-color: white;
+    border: 1px solid #d6e5d3;
+    border-radius: 8px;
+    padding: 20px;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.product-card h3 {
+    color: #287a3d;
+    margin-top: 0;
+}
+
+.product-card p {
+    overflow-wrap: anywhere;
+}
+
+.enquiry-section {
+    border-top: 1px solid #d6e5d3;
+    margin-top: 18px;
+    padding-top: 18px;
+}
+
+.enquiry-section form {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.enquiry-section input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.enquiry-section button {
+    max-width: 100%;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 15px;
+    }
+
+    .product-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Farmer Enquiries page */
+
+.enquiry-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 22px;
+    max-width: 1100px;
+    margin: 25px 0;
+}
+
+.enquiry-card {
+    background-color: white;
+    border: 1px solid #d6e5d3;
+    border-radius: 8px;
+    padding: 22px;
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+}
+
+.enquiry-card h2 {
+    color: #287a3d;
+    margin-top: 0;
+    font-size: 21px;
+}
+
+.enquiry-card p {
+    line-height: 1.6;
+    margin: 12px 0;
+}
+
+.status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #eeeeee;
+    color: #333333;
+    font-weight: bold;
+}
+
+.status.pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.empty-message {
+    background-color: white;
+    border: 1px solid #d6e5d3;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 500px;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 16px;
+    background-color: #287a3d;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    background-color: #1d5e2e;
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    .enquiry-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+.account-info {
+    background-color: white;
+    border: 1px solid #d6e5d3;
+    border-left: 5px solid #287a3d;
+    border-radius: 6px;
+    padding: 10px 16px;
+    margin: 18px 0;
+    max-width: 500px;
+}
+
+.account-info p {
+    margin: 6px 0;
+    font-size: 14px;
+}
+
+.enquiry-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.enquiry-actions form {
+    margin: 0;
+}
+
+.accept-button,
+.reject-button {
+    border: none;
+    padding: 10px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    color: white;
+}
+
+.accept-button {
+    background-color: #287a3d;
+}
+
+.accept-button:hover {
+    background-color: #1e5e2e;
+}
+
+.reject-button {
+    background-color: #b83232;
+}
+
+.reject-button:hover {
+    background-color: #922626;
+}

@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Enquiries | FarMket</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+    <header>
+        <h1>My Enquiries</h1>
+        <p>Track the status of your requests to farmers.</p>
+        <a th:href="@{/buyer-dashboard}">Back to Dashboard</a>
+    </header>
+
+    <main>
+        <h2>Your Enquiry History</h2>
+
+        <div th:if="${enquiries == null or #lists.isEmpty(enquiries)}">
+            <p>You have not sent any enquiries yet.</p>
+            <a th:href="@{/buyer-dashboard}">Browse Products</a>
+        </div>
+
+        <div th:each="enquiry : ${enquiries}" class="product-card">
+
+            <h3 th:text="${enquiry.productName}">Product Name</h3>
+
+            <p>
+                <strong>Farmer:</strong>
+                <span th:text="${enquiry.farmerEmail}">Farmer email</span>
+            </p>
+
+            <p>
+                <strong>Requested quantity:</strong>
+                <span th:text="${enquiry.requestedQuantity}">0</span> kg
+            </p>
+
+            <p>
+                <strong>Your offer:</strong>
+                ₹<span th:text="${#numbers.formatDecimal(enquiry.offeredPricePerKg, 1, 2)}">0.00</span>
+                per kg
+            </p>
+
+            <p>
+                <strong>Total offer amount:</strong>
+                ₹<span th:text="${#numbers.formatDecimal(enquiry.requestedQuantity * enquiry.offeredPricePerKg, 1, 2)}">0.00</span>
+            </p>
+
+            <p>
+                <strong>Message:</strong>
+                <span th:text="${enquiry.message}">Your message</span>
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+                <span th:if="${enquiry.status == 'PENDING'}"
+                      style="color: #b7791f; font-weight: bold;">
+                    Pending - Waiting for farmer response
+                </span>
+
+                <span th:if="${enquiry.status == 'ACCEPTED'}"
+                      style="color: #16803c; font-weight: bold;">
+                    Accepted by farmer
+                </span>
+
+                <span th:if="${enquiry.status == 'REJECTED'}"
+                      style="color: #c53030; font-weight: bold;">
+                    Rejected by farmer
+                </span>
+            </p>
+
+        </div>
+    </main>
+
+</body>
+</html>
